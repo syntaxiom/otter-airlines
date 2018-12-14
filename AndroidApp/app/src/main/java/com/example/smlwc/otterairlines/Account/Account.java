@@ -29,20 +29,18 @@ public class Account {
         this.admin = admin;
     }
 
-    //    public UUID getAccountId() {
-//        return accountId;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public String getPassword() { return password; }
-//
-//    public Date getDateCreated() {
-//        return dateCreated;
-//    }
+    public Account(UUID accountId, String username, String password, Date dateCreated) {
+        this.accountId = accountId;
+        this.username = username;
+        this.password = password;
+        this.dateCreated = dateCreated;
+        admin = false;
+        setValid();
+    }
 
+    public String getUsername() { return username; }
+
+    public String getPassword() { return password; }
 
     public boolean isAdmin() { return admin; }
 
@@ -53,7 +51,7 @@ public class Account {
         cv.put(AccountTable.Cols.UUID, accountId.toString());
         cv.put(AccountTable.Cols.USERNAME, username);
         cv.put(AccountTable.Cols.PASSWORD, password);
-        cv.put(AccountTable.Cols.DATE, dateCreated.toString());
+        cv.put(AccountTable.Cols.DATE, dateCreated.getTime());
         return cv;
     }
 

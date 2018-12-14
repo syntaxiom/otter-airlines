@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.smlwc.otterairlines.Account.Account;
+import com.example.smlwc.otterairlines.Account.AccountHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,6 +33,24 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.LoginButton);
         registerButton = findViewById(R.id.RegisterButton);
 
+        // Set login button functionality
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AccountHelper accountHelper = new AccountHelper(getApplicationContext());
+//                Account account = accountHelper.getAccount(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+//
+//                if (account == null) {
+//                    Toast.makeText(getApplicationContext(), "Username or password is incorrect.", Toast.LENGTH_LONG);
+//                }
+//                else {
+//                    Intent intent = new Intent(LoginActivity.this, ReservationsActivity.class);
+//                    startActivity(intent);
+//                }
+                accountHelper.insertAccount(new Account("Hello", "World"));
+            }
+        });
+
         // Set register button functionality
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,10 +59,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Move on if account is valid, otherwise notify the user
                 if (account.isValid()) {
-//                    AccountHelper accountHelper = new AccountHelper(getApplicationContext());
-//                    accountHelper.insertAccount(account);
-//                    Manager.setCurrentAccount(account);
-
                     // Go to admin activity if applicable
                     if (account.isAdmin()) {
 

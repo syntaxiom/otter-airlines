@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "349362734573",
+    "firebase_url": "https://learning-firebase-c6580.firebaseio.com",
+    "project_id": "learning-firebase-c6580",
+    "storage_bucket": "learning-firebase-c6580.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349362734573:android:6a801e1943e8fcd1",
+        "android_client_info": {
+          "package_name": "com.example.smlwc.otterairlines"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349362734573-vlh2j3l36cmu9qkelobmbd70m4jb3au1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQPHAI98iGjLrhRvVNql5gvClQHXS7a4A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
