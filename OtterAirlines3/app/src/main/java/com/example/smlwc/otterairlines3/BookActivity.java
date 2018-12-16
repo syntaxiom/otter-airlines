@@ -1,14 +1,20 @@
 package com.example.smlwc.otterairlines3;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.smlwc.otterairlines3.Account.AccountManager;
 import com.example.smlwc.otterairlines3.Reservation.Reservation;
 import com.example.smlwc.otterairlines3.Reservation.ReservationManager;
 
@@ -79,7 +85,34 @@ public class BookActivity extends AppCompatActivity {
                             Toaster.notEnoughTicketsToast();
                         }
                         else {
-                            
+                            AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
+                            builder.setTitle("Confirm Purchase");
+                            builder.setCancelable(true);
+                            builder.setMessage("Departing: " + departureCity + "\n" +
+                                                "Arriving: " + arrivalCity + "\n" +
+                                                "Tickets: " + numberOfTickets + "\n" +
+                                                "Price: $" + (numberOfTickets * 150));
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ReservationManager.bookFlight(AccountManager.getCurrentAccount(), getDepartureCity(), getArrivalCity(), getNumberOfTickets());
+                                    dialog.cancel();
+                                    startReservationsActivity();
+                                }
+                            });
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            AlertDialog alert = builder.create();
+                            try {
+                                alert.show();
+                            }
+                            catch (Exception e) {
+                                Log.d("yolo", e.getMessage());
+                            }
                         }
                     }
                 }
@@ -101,5 +134,11 @@ public class BookActivity extends AppCompatActivity {
 
     private String getArrivalCity() {
         return arrivalCitySpinner.getSelectedItem().toString();
+    }
+
+    private void startReservationsActivity() {
+        Intent intent = new Intent(BookActivity.this, ReservationsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

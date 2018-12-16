@@ -2,4 +2,6 @@
     <string name="app_name">OtterAirlines3</string>
     <string name="title_activity_reservations">ReservationsActivity</string>
     <string name="title_activity_book">BookActivity</string>
+    <string name="yes">Yes</string>
+    <string name="no">NO</string>
 </resources>

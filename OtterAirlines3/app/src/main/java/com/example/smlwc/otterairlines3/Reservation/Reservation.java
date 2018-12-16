@@ -1,7 +1,5 @@
 package com.example.smlwc.otterairlines3.Reservation;
 
-import com.example.smlwc.otterairlines3.Account.Account;
-
 import java.util.Date;
 
 public class Reservation {
@@ -37,5 +35,13 @@ public class Reservation {
 
     public Date getDate() {
         return date;
+    }
+
+    @Override
+    public String toString() {
+        return  "Departing: " + departureCity + "\n" +
+                "Arriving: " + arrivalCity + "\n" +
+                "Tickets: " + numberOfTickets + "\n" +
+                "Price: $" + (numberOfTickets * 150);
     }
 }
