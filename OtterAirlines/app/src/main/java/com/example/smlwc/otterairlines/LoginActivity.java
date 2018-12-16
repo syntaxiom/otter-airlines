@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.smlwc.otterairlines.Account.Account;
+import com.example.smlwc.otterairlines.Account.AccountLog;
 import com.example.smlwc.otterairlines.Account.AccountItem;
 
 public class LoginActivity extends AppCompatActivity {
@@ -16,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     Button registerButton;
 
-    Account mAccount;
+    AccountLog mAccountLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,22 @@ public class LoginActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.RegisterButton);
 
         // Get database stuff
-        mAccount = Account.get(this.getApplicationContext());
+        mAccountLog = AccountLog.get(this.getApplicationContext());
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAccount.addAccountItem(new AccountItem("hello", "world"));
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                AccountItem accountItem = mAccountLog.getAccountItem(username, password);
+
+                if (accountItem == null) {
+                    Toast.makeText(getApplicationContext(), "Username and/or password incorrect.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "You're in!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
