@@ -1,5 +1,8 @@
 package com.example.smlwc.otterairlines3.Account;
 
+import com.example.smlwc.otterairlines3.Reservation.Reservation;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Account {
@@ -8,6 +11,7 @@ public class Account {
     private boolean admin;
     private boolean validInfo;
     private Date date;
+    private ArrayList<Reservation> reservations;
 
     public Account(String username, String password, boolean admin) {
         this.username = username;
@@ -15,6 +19,7 @@ public class Account {
         this.admin = admin;
         validInfo = isAccountInfoValid();
         date = new Date();
+        reservations = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -35,6 +40,14 @@ public class Account {
 
     public Date getDate() {
         return date;
+    }
+
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
     }
 
     private boolean isAccountInfoValid() {

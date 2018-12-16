@@ -1,9 +1,6 @@
 package com.example.smlwc.otterairlines3.Account;
 
-import android.util.Log;
-
 import java.util.HashMap;
-import java.util.UUID;
 
 public class AccountManager {
     private static HashMap<String, Account> accounts = new HashMap<String, Account>(){{

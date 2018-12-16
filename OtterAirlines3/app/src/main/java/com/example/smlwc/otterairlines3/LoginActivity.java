@@ -25,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Set toaster
+        Toaster.setApplicationContext(getApplicationContext());
+
         // Set title on startup
         setTitle("Welcome!");
 
@@ -44,18 +47,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Invalid login if account doesn't exist or if password is incorrect
                 if (checkAccount == null) {
-                    noSuchAccountToast();
+                    Toaster.noSuchAccountToast();
                 }
                 else {
                     if (!password.equals(checkAccount.getPassword())) {
-                        invalidLoginToast();
+                        Toaster.invalidLoginToast();
                     }
                     else {
-                        successfulLoginToast();
+                        Toaster.successfulLoginToast();
                         AccountManager.setCurrentAccount(checkAccount);
-
-                        Intent intent = new Intent(LoginActivity.this, ReservationsActivity.class);
-                        startActivity(intent);
+                        startReservationsActivity();
                     }
                 }
             }
@@ -71,21 +72,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Inform user if account already exists or if information is invalid, else register them
                 if (checkAccount != null) {
-                    accountAlreadyExistsToast();
+                    Toaster.accountAlreadyExistsToast();
                 }
                 else {
                     Account account = new Account(username, password, false);
 
                     if (!account.isValidInfo()) {
-                        invalidRegisterToast();
+                        Toaster.invalidRegisterToast();
                     }
                     else {
-                        successfulRegisterToast();
+                        Toaster.successfulRegisterToast();
                         AccountManager.addAccount(username, account);
                         AccountManager.setCurrentAccount(account);
-
-                        Intent intent = new Intent(LoginActivity.this, ReservationsActivity.class);
-                        startActivity(intent);
+                        startReservationsActivity();
                     }
                 }
             }
@@ -100,33 +99,9 @@ public class LoginActivity extends AppCompatActivity {
         return passwordEditText.getText().toString();
     }
 
-    private void accountAlreadyExistsToast() {
-        toaster("Account already exists. Please login.");
-    }
-
-    private void noSuchAccountToast() {
-        toaster("Account doesn't exist. Would you like to register?");
-    }
-
-    private void invalidLoginToast() {
-        toaster("Invalid login. Please try again.");
-    }
-
-    private void invalidRegisterToast() {
-        toaster("Username and password must contain 3 letters and 1 digit.");
-    }
-
-    private void successfulLoginToast() {
-        toaster("You're in!");
-    }
-
-    private void successfulRegisterToast() {
-        toaster("Welcome aboard!");
-    }
-
-    private void toaster(String message) {
-        Toast t = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
-        t.setGravity(Gravity.BOTTOM, 0, 0);
-        t.show();
+    private void startReservationsActivity() {
+        Intent intent = new Intent(LoginActivity.this, ReservationsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
