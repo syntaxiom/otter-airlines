@@ -85,34 +85,38 @@ public class BookActivity extends AppCompatActivity {
                             Toaster.notEnoughTicketsToast();
                         }
                         else {
+                            // Start building the alert
                             AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
                             builder.setTitle("Confirm Purchase");
                             builder.setCancelable(true);
+
+                            // Inform the user what they've purchased
                             builder.setMessage("Departing: " + departureCity + "\n" +
                                                 "Arriving: " + arrivalCity + "\n" +
                                                 "Tickets: " + numberOfTickets + "\n" +
                                                 "Price: $" + (numberOfTickets * 150));
+
+                            // The user can accept
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    ReservationManager.bookFlight(AccountManager.getCurrentAccount(), getDepartureCity(), getArrivalCity(), getNumberOfTickets());
+                                    ReservationManager.setCurrentReservation(ReservationManager.bookFlight(AccountManager.getCurrentAccount(), getDepartureCity(), getArrivalCity(), getNumberOfTickets()));
                                     dialog.cancel();
                                     startReservationsActivity();
                                 }
                             });
+
+                            // The user can cancel
                             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
                                 }
                             });
+
+                            // Show the alert
                             AlertDialog alert = builder.create();
-                            try {
-                                alert.show();
-                            }
-                            catch (Exception e) {
-                                Log.d("yolo", e.getMessage());
-                            }
+                            alert.show();
                         }
                     }
                 }

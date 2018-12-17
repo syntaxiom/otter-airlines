@@ -54,51 +54,77 @@ public class ReservationsActivity extends AppCompatActivity {
 
         // Hide "add new reservation" text view if reservations aren't empty
         if (!reservations.isEmpty()) {
-            addNewReservationTextView.setVisibility(View.INVISIBLE);
+            // Get number of canceled
+            int canceledCount = 0;
+
+            // Increment canceled count
+            for (Reservation reservation : reservations) {
+                if (reservation.isCanceled()) {
+                    canceledCount += 1;
+                }
+            }
+
+            // Hide text if needed
+            if (canceledCount < reservations.size()) {
+                addNewReservationTextView.setVisibility(View.INVISIBLE);
+            }
         }
 
         // Add card views per reservation
-        for (Reservation reservation : reservations) {
-            CardView cardView = new CardView(this);
-            TextView flightTextView = new TextView(this);
-            TextView departureTextView = new TextView(this);
-            TextView arrivalTextView = new TextView(this);
-            TextView ticketTextView = new TextView(this);
-            LinearLayout linearLayout = new LinearLayout(this);
+        for (final Reservation reservation : reservations) {
+            // Only if reservation isn't canceled
+            if (!reservation.isCanceled()) {
+                CardView cardView = new CardView(this);
+                TextView flightTextView = new TextView(this);
+                TextView departureTextView = new TextView(this);
+                TextView arrivalTextView = new TextView(this);
+                TextView ticketTextView = new TextView(this);
+                LinearLayout linearLayout = new LinearLayout(this);
 
-            // Set layout
-            linearLayout.setOrientation(LinearLayout.VERTICAL);
+                // Set layout
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-            // Set flight text view
-            flightTextView.setTextSize(18);
-            flightTextView.setText(ReservationManager.getFlight(reservation.getDepartureCity(), reservation.getArrivalCity()));
+                // Set flight text view
+                flightTextView.setTextSize(18);
+                flightTextView.setText(ReservationManager.getFlight(reservation.getDepartureCity(), reservation.getArrivalCity()));
 
-            // Set departure text view
-            departureTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_flight_takeoff_black_18dp, 0, 0, 0);
-            departureTextView.setTextSize(22);
-            departureTextView.setText("   " + reservation.getDepartureCity());
+                // Set departure text view
+                departureTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_flight_takeoff_black_18dp, 0, 0, 0);
+                departureTextView.setTextSize(22);
+                departureTextView.setText("  " + reservation.getDepartureCity());
 
-            // Set arrival text view
-            arrivalTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_flight_land_black_18dp, 0, 0, 0);
-            arrivalTextView.setTextSize(22);
-            arrivalTextView.setText("   " + reservation.getArrivalCity());
+                // Set arrival text view
+                arrivalTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_flight_land_black_18dp, 0, 0, 0);
+                arrivalTextView.setTextSize(22);
+                arrivalTextView.setText("  " + reservation.getArrivalCity());
 
-            // Set ticket text view
-            ticketTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_receipt_black_18dp, 0, 0, 0);
-            ticketTextView.setTextSize(22);
-            ticketTextView.setText("   " + reservation.getNumberOfTickets() + " ($" + (reservation.getNumberOfTickets() * 150) + ")");
+                // Set ticket text view
+                ticketTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_receipt_black_18dp, 0, 0, 0);
+                ticketTextView.setTextSize(22);
+                ticketTextView.setText("  " + reservation.getNumberOfTickets() + " ($" + (reservation.getNumberOfTickets() * 150) + ")");
 
-            // Add them to the linearLayout
-            linearLayout.addView(flightTextView);
-            linearLayout.addView(departureTextView);
-            linearLayout.addView(arrivalTextView);
-            linearLayout.addView(ticketTextView);
+                // Add them to the linearLayout
+                linearLayout.addView(flightTextView);
+                linearLayout.addView(departureTextView);
+                linearLayout.addView(arrivalTextView);
+                linearLayout.addView(ticketTextView);
 
-            // Add layout to card
-            cardView.addView(linearLayout);
+                // Add layout to card
+                cardView.addView(linearLayout);
 
-            // Add card to the layout
-            reservationsLinearLayout.addView(cardView);
+                // Add card to the layout
+                reservationsLinearLayout.addView(cardView);
+
+                // Card click
+                cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ReservationManager.setCurrentReservation(reservation);
+                        startInspectActivity();
+                    }
+                });
+            }
+
         }
 
         // FAB click
@@ -112,6 +138,12 @@ public class ReservationsActivity extends AppCompatActivity {
 
     private void startBookActivity() {
         Intent intent = new Intent(ReservationsActivity.this, BookActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void startInspectActivity() {
+        Intent intent = new Intent(ReservationsActivity.this, InspectActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

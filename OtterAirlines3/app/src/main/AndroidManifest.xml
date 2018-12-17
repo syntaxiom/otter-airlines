@@ -20,10 +20,14 @@
             android:name=".ReservationsActivity"
             android:label="@string/title_activity_reservations"
             android:parentActivityName=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BookActivity"
             android:label="@string/title_activity_book"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".InspectActivity"
+            android:label="@string/title_activity_inspect"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

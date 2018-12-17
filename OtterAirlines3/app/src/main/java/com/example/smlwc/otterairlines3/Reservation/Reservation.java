@@ -8,6 +8,7 @@ public class Reservation {
     private String arrivalCity;
     private int numberOfTickets;
     private Date date;
+    private boolean canceled;
 
     public Reservation(String username, String departureCity, String arrivalCity, int numberOfTickets) {
         this.username = username;
@@ -15,6 +16,7 @@ public class Reservation {
         this.arrivalCity = arrivalCity;
         this.numberOfTickets = numberOfTickets;
         date = new Date();
+        canceled = false;
     }
 
     public String getUsername() {
@@ -35,6 +37,14 @@ public class Reservation {
 
     public Date getDate() {
         return date;
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
     }
 
     @Override

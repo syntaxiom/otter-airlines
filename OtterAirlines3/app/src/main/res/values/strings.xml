@@ -4,4 +4,5 @@
     <string name="title_activity_book">BookActivity</string>
     <string name="yes">Yes</string>
     <string name="no">NO</string>
+    <string name="title_activity_inspect">InspectActivity</string>
 </resources>
