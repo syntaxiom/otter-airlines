@@ -22,4 +22,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/noCancellationsTextView"
+        android:layout_width="212dp"
+        android:layout_height="39dp"
+        android:text="No cancellations"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/cancellationsScrollView"
+        app:layout_constraintEnd_toStartOf="@+id/cancellationsScrollView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cancellationsScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/cancellationsScrollView" />
 </android.support.constraint.ConstraintLayout>

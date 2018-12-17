@@ -3,6 +3,7 @@ package com.example.smlwc.otterairlines3;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class CancellationsActivity extends AppCompatActivity {
 
     // UI components
     LinearLayout cancellationsLinearLayout;
+    TextView noCancellationsTextView;
 
     // Other necessary stuff
     ArrayList<Account> accounts;
@@ -31,6 +33,7 @@ public class CancellationsActivity extends AppCompatActivity {
 
         // Get UI components
         cancellationsLinearLayout = findViewById(R.id.cancellationsLinearLayout);
+        noCancellationsTextView = findViewById(R.id.noCancellationsTextView);
 
         // Get other necessary stuff
         accounts = AccountManager.getAccounts();
@@ -39,6 +42,9 @@ public class CancellationsActivity extends AppCompatActivity {
         for (Account account : accounts) {
             for (Reservation reservation : account.getReservations()) {
                 if (reservation.isCanceled()) {
+                    // Hide no cancellations text view
+                    noCancellationsTextView.setVisibility(View.INVISIBLE);
+
                     CardView cardView = new CardView(this);
                     TextView textView = new TextView(this);
 
