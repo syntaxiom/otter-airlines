@@ -59,7 +59,13 @@ public class InspectActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         ReservationManager.cancelFlight(ReservationManager.getCurrentReservation());
                         dialog.cancel();
-                        startReservationsActivity();
+
+                        if (AccountManager.getCurrentAccount().isAdmin()) {
+                            startFlightsActivity();
+                        }
+                        else {
+                            startReservationsActivity();
+                        }
                     }
                 });
 
@@ -80,6 +86,12 @@ public class InspectActivity extends AppCompatActivity {
 
     private void startReservationsActivity() {
         Intent intent = new Intent(InspectActivity.this, ReservationsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void startFlightsActivity() {
+        Intent intent = new Intent(InspectActivity.this, FlightsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

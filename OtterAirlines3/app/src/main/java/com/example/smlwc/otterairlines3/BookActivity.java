@@ -102,7 +102,14 @@ public class BookActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     ReservationManager.setCurrentReservation(ReservationManager.bookFlight(AccountManager.getCurrentAccount(), getDepartureCity(), getArrivalCity(), getNumberOfTickets()));
                                     dialog.cancel();
-                                    startReservationsActivity();
+
+                                    if (AccountManager.getCurrentAccount().isAdmin()) {
+                                        startFlightsActivity();
+                                    }
+                                    else {
+                                        startReservationsActivity();
+                                    }
+
                                 }
                             });
 
@@ -142,6 +149,12 @@ public class BookActivity extends AppCompatActivity {
 
     private void startReservationsActivity() {
         Intent intent = new Intent(BookActivity.this, ReservationsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void startFlightsActivity() {
+        Intent intent = new Intent(BookActivity.this, FlightsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

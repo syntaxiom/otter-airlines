@@ -38,7 +38,7 @@ public class AdminActivity extends AppCompatActivity {
         flightsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startFlightsActivity();
             }
         });
 
@@ -53,6 +53,12 @@ public class AdminActivity extends AppCompatActivity {
 
     private void startAccountsActivity() {
         Intent intent = new Intent(AdminActivity.this, AccountsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void startFlightsActivity() {
+        Intent intent = new Intent(AdminActivity.this, FlightsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

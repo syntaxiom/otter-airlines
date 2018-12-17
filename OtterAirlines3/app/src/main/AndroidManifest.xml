@@ -31,7 +31,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".AccountsActivity" />
-        <activity android:name=".CancellationsActivity"></activity>
+        <activity android:name=".CancellationsActivity" />
+        <activity
+            android:name=".FlightsActivity"
+            android:label="@string/title_activity_flights"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

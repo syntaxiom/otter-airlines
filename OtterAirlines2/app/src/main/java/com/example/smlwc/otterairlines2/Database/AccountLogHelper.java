@@ -50,7 +50,7 @@ public class AccountLogHelper extends SQLiteOpenHelper {
                                     ")"
         );
 
-        Log.d("yolo", Boolean.toString(this.db == null));
+//        Log.d("yolo", Boolean.toString(this.db == null));
 
 
         // Generate default accounts

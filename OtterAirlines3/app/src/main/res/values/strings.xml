@@ -5,4 +5,5 @@
     <string name="yes">Yes</string>
     <string name="no">NO</string>
     <string name="title_activity_inspect">InspectActivity</string>
+    <string name="title_activity_flights">FlightsActivity</string>
 </resources>
