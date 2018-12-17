@@ -30,7 +30,8 @@
             android:label="@string/title_activity_inspect"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AdminActivity" />
-        <activity android:name=".AccountsActivity"></activity>
+        <activity android:name=".AccountsActivity" />
+        <activity android:name=".CancellationsActivity"></activity>
     </application>
 
 </manifest>

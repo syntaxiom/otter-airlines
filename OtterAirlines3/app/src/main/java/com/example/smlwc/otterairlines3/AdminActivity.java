@@ -46,13 +46,19 @@ public class AdminActivity extends AppCompatActivity {
         cancellationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startCancellationsActivity();
             }
         });
     }
 
     private void startAccountsActivity() {
         Intent intent = new Intent(AdminActivity.this, AccountsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void startCancellationsActivity() {
+        Intent intent = new Intent(AdminActivity.this, CancellationsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
