@@ -56,7 +56,13 @@ public class LoginActivity extends AppCompatActivity {
                     else {
                         Toaster.successfulLoginToast();
                         AccountManager.setCurrentAccount(checkAccount);
-                        startReservationsActivity();
+
+                        if (checkAccount.isAdmin()) {
+                            startAdminActivity();
+                        }
+                        else {
+                            startReservationsActivity();
+                        }
                     }
                 }
             }
@@ -101,6 +107,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startReservationsActivity() {
         Intent intent = new Intent(LoginActivity.this, ReservationsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void startAdminActivity() {
+        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

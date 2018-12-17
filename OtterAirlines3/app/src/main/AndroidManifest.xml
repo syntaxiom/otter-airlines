@@ -28,7 +28,9 @@
         <activity
             android:name=".InspectActivity"
             android:label="@string/title_activity_inspect"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".AccountsActivity"></activity>
     </application>
 
 </manifest>

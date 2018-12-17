@@ -124,7 +124,6 @@ public class ReservationsActivity extends AppCompatActivity {
                     }
                 });
             }
-
         }
 
         // FAB click

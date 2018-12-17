@@ -2,6 +2,7 @@ package com.example.smlwc.otterairlines3.Account;
 
 import com.example.smlwc.otterairlines3.Reservation.Reservation;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -85,5 +86,12 @@ public class Account {
                 (digitCountUsername >= minDigitsUsername) &&
                 (letterCountPassword >= minLettersPassword) &&
                 (digitCountPassword >= minDigitsPassword);
+    }
+
+    @Override
+    public String toString() {
+        return  "Username: " + username + "\n" +
+                "Password: " + password + "\n" +
+                "Date created: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
     }
 }

@@ -1,5 +1,8 @@
 package com.example.smlwc.otterairlines3.Account;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AccountManager {
@@ -26,5 +29,15 @@ public class AccountManager {
 
     public static void setCurrentAccount(Account currentAccount) {
         AccountManager.currentAccount = currentAccount;
+    }
+
+    public static ArrayList<Account> getAccounts() {
+        ArrayList<Account> accountsList = new ArrayList<>();
+
+        for (Account account : accounts.values()) {
+            accountsList.add(account);
+        }
+
+        return accountsList;
     }
 }
